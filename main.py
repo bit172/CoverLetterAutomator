@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import messagebox
 
 
 def center(toplevel):
@@ -13,6 +13,18 @@ def center(toplevel):
     y = screen_height / 2 - size[1] / 2
 
     toplevel.geometry("+%d+%d" % (x, y))
+
+
+def generate_letter():
+    if name_text.get() == '' \
+            or company_text.get() == '' \
+            or address_text.get() == '' \
+            or cityPostal_text.get() == '' \
+            or positionTitle_text.get() == '' \
+            or gender_text.get() == '' \
+            or fileName_text.get() == '':
+        messagebox.showerror('Required Fields', 'Please include all fields')
+        return
 
 
 root = Tk()
@@ -73,11 +85,12 @@ fileName_entry.insert(0, "Cover Letter1.docx")
 fileName_entry.grid(row=6, column=1, columnspan=3)
 
 # Generate Button
-generate_button = Button(root, text='Generate', padx=10, pady=5)
+generate_button = Button(root, text='Generate', command=generate_letter, padx=10, pady=5)
 generate_button.grid(row=7, column=2, sticky=E)
 
 # Quit Button
 quit_button = Button(root, text='Quit', command=root.quit, padx=10, pady=5)
 quit_button.grid(row=7, column=3)
 
+# Start Program
 root.mainloop()
