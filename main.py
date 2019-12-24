@@ -2,14 +2,6 @@ from tkinter import *
 from tkinter import ttk
 
 
-def calculate(*args):
-    try:
-        value = float(feet.get())
-        meters.set((0.3048 * value * 10000.0 + 0.5) / 10000.0)
-    except ValueError:
-        pass
-
-
 def center(toplevel):
     toplevel.update_idletasks()
 
@@ -24,31 +16,68 @@ def center(toplevel):
 
 
 root = Tk()
-root.geometry("400x300")
+root.geometry("450x500")
 root.title("Cover Letter Automator")
 center(root)
 
-mainframe = ttk.Frame(root, padding="3 3 12 12")
-mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
+# Name
+name_text = StringVar()
+name_label = Label(root, text='Name', font=('bold', 12), padx=20, pady=20)
+name_label.grid(row=0, column=0, sticky=W)
+name_entry = Entry(root, textvariable=name_text, width=50)
+name_entry.grid(row=0, column=1, columnspan=3)
 
-feet = StringVar()
-meters = StringVar()
+# Company
+company_text = StringVar()
+company_label = Label(root, text='Company', font=('bold', 12), padx=20, pady=20)
+company_label.grid(row=1, column=0, sticky=W)
+company_entry = Entry(root, textvariable=company_text, width=50)
+company_entry.grid(row=1, column=1, columnspan=3)
 
-feet_entry = ttk.Entry(mainframe, width=7, textvariable=feet)
-feet_entry.grid(column=2, row=1, sticky=(W, E))
+# Address
+address_text = StringVar()
+address_label = Label(root, text='Address', font=('bold', 12), padx=20, pady=20)
+address_label.grid(row=2, column=0, sticky=W)
+address_entry = Entry(root, textvariable=address_text, width=50)
+address_entry.grid(row=2, column=1, columnspan=3)
 
-ttk.Label(mainframe, textvariable=meters).grid(column=2, row=2, sticky=(W, E))
-ttk.Button(mainframe, text="Calculate", command=calculate).grid(column=3, row=3, sticky=W)
+# City Postal
+cityPostal_text = StringVar()
+cityPostal_label = Label(root, text='City Postal', font=('bold', 12), padx=20, pady=20)
+cityPostal_label.grid(row=3, column=0, sticky=W)
+cityPostal_entry = Entry(root, textvariable=cityPostal_text, width=50)
+cityPostal_entry.grid(row=3, column=1, columnspan=3)
 
-ttk.Label(mainframe, text="feet").grid(column=3, row=1, sticky=W)
-ttk.Label(mainframe, text="is equivalent to").grid(column=1, row=2, sticky=E)
-ttk.Label(mainframe, text="meters").grid(column=3, row=2, sticky=W)
+# Position Title
+positionTitle_text = StringVar()
+positionTitle_label = Label(root, text='Position Title', font=('bold', 12), padx=20, pady=20)
+positionTitle_label.grid(row=4, column=0, sticky=W)
+positionTitle_entry = Entry(root, textvariable=positionTitle_text, width=50)
+positionTitle_entry.grid(row=4, column=1, columnspan=3)
 
-for child in mainframe.winfo_children():
-    child.grid_configure(padx=5, pady=5)
+# Gender
+gender_text = StringVar(value="Mr.")
+gender_label = Label(root, text='Gender', font=('bold', 12), padx=20, pady=20)
+gender_label.grid(row=5, column=0, sticky=W)
+gender_radio1 = Radiobutton(root, text="Mr.", variable=gender_text, value="Mr.")
+gender_radio2 = Radiobutton(root, text="Ms.", variable=gender_text, value="Ms.")
+gender_radio1.grid(row=5, column=1, sticky=W)
+gender_radio2.grid(row=5, column=2, sticky=W)
 
-feet_entry.focus()
-root.bind('<Return>', calculate)
+# File Name
+fileName_text = StringVar()
+fileName_label = Label(root, text='File Name', font=('bold', 12), padx=20, pady=20)
+fileName_label.grid(row=6, column=0, sticky=W)
+fileName_entry = Entry(root, textvariable=fileName_text, width=50)
+fileName_entry.insert(0, "Cover Letter1.docx")
+fileName_entry.grid(row=6, column=1, columnspan=3)
+
+# Generate Button
+generate_button = Button(root, text='Generate', padx=10, pady=5)
+generate_button.grid(row=7, column=2, sticky=E)
+
+# Quit Button
+quit_button = Button(root, text='Quit', command=root.quit, padx=10, pady=5)
+quit_button.grid(row=7, column=3)
+
 root.mainloop()
