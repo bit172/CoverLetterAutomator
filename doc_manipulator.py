@@ -10,7 +10,6 @@ def replace_string(old_text, new_text, p):
             if old_text in inline[i].text:
                 text = inline[i].text.replace(old_text, new_text)
                 inline[i].text = text
-        print(p.text)
 
 
 class DocManipulator:
@@ -19,11 +18,12 @@ class DocManipulator:
 
     def replace_info(self, new_info):
         for p in self.document.paragraphs:
-            replace_string('$name', 'John Doe', p)
-        self.document.save('dest1.docx')
-
-
-if __name__ == '__main__':
-    manipulator = DocManipulator("Cover Letter.docx")
-    manipulator.replace_info(1)
-    pass
+            replace_string('$date', new_info['date'], p)
+            replace_string('$name', new_info['name'], p)
+            replace_string('$company', new_info['company'], p)
+            replace_string('$address', new_info['address'], p)
+            replace_string('$city', new_info['city_postal'], p)
+            replace_string('$subject', new_info['subject'], p)
+            replace_string('$gender', new_info['gender'], p)
+            replace_string('$position', new_info['position_title'], p)
+        self.document.save(new_info['fileName'])
