@@ -5,7 +5,7 @@ This program automates the redundant copy pasting for writing cover letters.
 ### Prerequisites
 It is recommended to remove all formatting of the document and reformatting.
 
-The program needs to be place with a docx file name **Cover Letter.docx** \
+The program needs to be place with a docx file named **Cover Letter.docx** \
 There are tags to be place inside the document:
 * **$date** for the date
 * **$name** for the name of the recipient
